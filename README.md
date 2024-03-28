@@ -2,9 +2,7 @@
 
 **Data Sciencist:** Elina Rankova
 
-<div style="width: 100%; text-align: center;">
-  <img src="https://altheia.com/wp-content/uploads/2020/12/0KbmpXTpCCIt1TR1B-1280x720.png" width="720" height="450" style="margin: 0 auto;"/>
-</div>
+ <p align="center"><img src="https://altheia.com/wp-content/uploads/2020/12/0KbmpXTpCCIt1TR1B-1280x720.png" width="720" height="450" style="margin: 0 auto;"/></p>
 
 <u>image source</u>: <a href="https://altheia.com/recommended-tools-for-data-scientists-in-the-medical-field/">Altheia; Recommended Tools for Data Scientists in the Medical Field</a>
 
