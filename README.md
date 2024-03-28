@@ -12,9 +12,9 @@
 
 **Stakeholders:** Healing Hearts Partners, Lead Receptionist, Lead Nurse, Lead Medical Assistant
 
-Healing Hearts is growing and is noticing that patients are not recieving response to common questions regarding specific diseases in a timely manner. They are interseted in automating the Q&A process for both patients and the front desk staff who have a hard time distinguishing where to direct questions.
+Healing Hearts medical practice is growing and is noticing that patients are not recieving response to common questions regarding specific diseases in a timely manner. They are interested in automating the Q&A process for both patients and the front desk staff who have a hard time distinguishing where to direct questions.
 
-For Phase 1 of this Natural Language Processing (NLP) task, we will be classifying the questions based on question type, aiming to predict the question type of questions being asked of reception.
+For Phase 1 of this Natural Language Processing (NLP) task, we will be classifying the questions based on question type, aiming to predict the question type of questions being asked by patients.
 
 **The goal:** Create classification model that predicts question type from which reception can determine who is best equiped to answer patient, improving productivity and patient satisfaction.
 
@@ -49,11 +49,11 @@ support groups :  Where to find support for people with Alcohol Use and Older Ad
 
 **Class Imbalance**
 
-Since we have some question types that have very few instances, we will have to drop that row before spliting our data if we want to keep class proportions. We will also have to consider our class imbalance when creating our models.
+Since we have some question types that have very few instances, we will also have to consider our class imbalance when creating our models.
 
 We can also use `LabelEncoder` to transform this variable before the train test split if we choose.
 
-**Note:** There class `support groups` only has one record, if we plan to keep our class proportions when we plit our data, we will have to drop this class
+**Note:** There class `support groups` only has one record, if we plan to keep our class proportions when we split our data, we will have to drop this class
 
 <p align="center">
   <img src="https://github.com/erankova/Phase_4_Project/assets/155934070/3d551dac-d9f1-43bf-bebc-8aea9d27ebc6" alt="Class Count Chart">
@@ -88,7 +88,7 @@ Before we split our data, we first drop the `support groups` class which contain
 
 As our base model, we will try a `MultinomialNB` model as it is great for text classification problems. Before fitting, we have to add the `TFidVectorizer` to our pipeline to vectorize our text with class weights in mind.
 
-We set our minimum document frequency and maximum document frequency to .03 and .98 respectively to make sure that we don't penalize rare/frequent words too much but also don't loosen the thresholds too much and create noisy predictions.
+We set our minimum document frequency and maximum document frequency to .03 and .98 respectively to make sure that we don't penalize rare/frequent words too much but also don't loosen the thresholds so much that we create noisy predictions.
 
 ![Base Model Pipeline](https://github.com/erankova/Phase_4_Project/assets/155934070/864fac0a-1824-4379-a51b-7145abf7c2b5)
 
@@ -107,7 +107,7 @@ Since we have a class imbalance we will be focusing on a **weighted F1 score** a
 
 Now that we have our base model, we can finetune our `MultiNomialNB` to see if we can improve our scores.
 
-> For each subsequent model we try going forward we will utilize `RandomizedSearchCV` to tune our parameters and perform cross validation since it is less computationally costy and will save us some time while giving us direction about our model performance.
+> For each subsequent model we try going forward, we will utilize `RandomizedSearchCV` to tune our parameters and perform cross validation since it is less computationally costy than `GridSearchCV` and will save us some time while giving us direction about our model performance.
 
 We also try a `ComplementNB` model since it is supposed to be great for class imbalance. After hyperparameter tuning and cross validation however, we see our tuned `MultiNomialNB` performs significantly better on our F1 score.
 
@@ -141,7 +141,7 @@ When we look at the feature importances of both models, the similarity between t
   <img src="https://github.com/erankova/Phase_4_Project/assets/155934070/aeb0634d-980b-4c95-a6dd-7d63d761ef15" alt="Final Models Feature Importances">
 </p>
 
-Looking at our classification report we can tell that the `AdaBoostingClassifier` while, doing mostly as well as the `DecisionTreeClassifier` it has better scores for accuracy, recall, and precision. This means that it is balancing false negatives and false positives well and producing largly accurate predictions for us!
+Looking at our classification report we can tell that the `AdaBoostingClassifier` while doing mostly as well as the `DecisionTreeClassifier`, it has better scores for accuracy, recall, and precision. This means that it is balancing false negatives and false positives well and producing largly accurate predictions for us!
 
 <div style="display: flex; justify-content: center;">
   <img src="https://github.com/erankova/Phase_4_Project/assets/155934070/69ea77ce-0ce0-4771-82d1-9a6c627b0064" alt="DecisionTree Classification Report" style="width: 50%;">
@@ -158,7 +158,7 @@ For _<ins>Phase 1</ins>_ of this NLP task, we recommend implementing the model f
 
 **Positive Implications:** 
 
-Since the metrics are strong, we can be confident in routing questions to the right person, making the patient care more effient for both the office staff and patients alike.
+Since the metrics are strong, we can be confident in routing questions to the right person, making the patient care more efficient for both the office staff and patients alike.
 
 **Negative Implications:**
 
@@ -170,7 +170,6 @@ As seen in our exploration, our dataset is limited in record number as well as t
 
 In addition, by increasing the amount of available data, our model can afford to add more strict constraints on minimum and maximum document frequency of tokens. This will make our predictions stronger and create a strong baseline to expand on how we use this information.
 
-Ultimately, Healing Hearts would like to implement a Retrieval-Augmented Generation (RAG) chatbot. This chatbot would enable patients and potentially medical staff to not only recieve the general category of the questions being asked, but an answer to those questions as well. This chatbot can be implemented where appropriate and provide an option to speak to a person if the patient so chooses, since Healing Hearts is first and foremost concerned about their patients satisfaction and wellbeing.
-
+Ultimately, Healing Hearts would like to implement a Retrieval-Augmented Generation (RAG) chatbot. This chatbot would enable patients and potentially medical staff to not only recieve the general category of the questions being asked, but an answer to those questions well, all based on similarity metrics created from existing data. Since Healing Hearts is first and foremost concerned about their patients satisfaction and wellbeing, this chatbot can be implemented where appropriate and provide an option to speak to a person if the patient so chooses.
 
 
