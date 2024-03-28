@@ -141,10 +141,10 @@ When we look at the feature importances of both models, the similarity between t
 
 Looking at our classification report we can tell that the `AdaBoostingClassifier` while doing mostly as well as the `DecisionTreeClassifier`, it has better scores for accuracy, recall, and precision. This means that it is balancing false negatives and false positives well and producing largly accurate predictions for us!
 
-<div style="display: flex; justify-content: center;">
-  <img src="https://github.com/erankova/Phase_4_Project/raw/main/assets/155934070/69ea77ce-0ce0-4771-82d1-9a6c627b0064.png" alt="DecisionTree Classification Report" style="width: 50%;">
-  <img src="https://github.com/erankova/Phase_4_Project/raw/main/assets/155934070/eefe984f-cab5-4b25-83d2-daff027f4342.png" alt="AdaBoost Classification Report" style="width: 50%;">
-</div>
+<p align="center">
+  <img src="https://github.com/erankova/Phase_4_Project/assets/155934070/69ea77ce-0ce0-4771-82d1-9a6c627b0064" alt="DecisionTree Classification Report" style="width: 45%;">
+  <img src="https://github.com/erankova/Phase_4_Project/assets/155934070/eefe984f-cab5-4b25-83d2-daff027f4342" alt="AdaBoost Classification Report" alt="AdaBoost Classification Report" style="width: 45%;">
+</p>
 
 ## Final Evaluation & Conclusion
 
