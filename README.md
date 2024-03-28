@@ -55,7 +55,7 @@ We can also use `LabelEncoder` to transform this variable before the train test 
 
 **Note:** There class `support groups` only has one record, if we plan to keep our class proportions when we plit our data, we will have to drop this class
 
-![Class Count Chart](https://github.com/erankova/Phase_4_Project/assets/155934070/3d551dac-d9f1-43bf-bebc-8aea9d27ebc6)
+<center>![Class Count Chart](https://github.com/erankova/Phase_4_Project/assets/155934070/3d551dac-d9f1-43bf-bebc-8aea9d27ebc6)</center>
 
 ### Preprocess Analysis
 
@@ -111,11 +111,19 @@ We also try a `ComplementNB` model since it is supposed to be great for class im
 
 Next we try some tree models, specifically the `DecisionTreeClassifier` and `RandomForestClassifier`.
 
-After applying `RandomizedSearchCV` to both, we can see that our `DecisionTreeClassifier` gives us the best F1 score on unseen data so far!
+After applying `RandomizedSearchCV` to both, we can see that our `DecisionTreeClassifier` gives us the best F1 score on unseen data so far! This could be due to the type of questions we have and their formulaic nature in relation to the `qtype`.
 
 ![DEC vs NB Metrics](https://github.com/erankova/Phase_4_Project/assets/155934070/f17e4af3-2eaa-4b0b-ac35-034b06a2f1c8)
 
+## Boosting Models
 
+Lastly, we try some boosting algorithms since cost sensitive learning could help us with or class imbalance.
+
+First, we try the `GradientBoostingClassifier`, then `XGBoostingClassifier`, and lastly the `AdaBoostingClassfier. After hyperparamter tuning and cross validation, our boosting models do pretty well! 
+
+Interestingly enough, the `DecisionTreeClassifier` still produces the best F1 score on unseen data! Close behind is the `AdaBoostingClassifier`, beating out the `GradientBoostingClassifier by a small amount. 
+
+![DEC vs BOOSTING Metrics](https://github.com/erankova/Phase_4_Project/assets/155934070/47364970-09b1-4fa0-a9e0-44f3ae0d63c4)
 
 
 
