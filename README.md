@@ -131,9 +131,46 @@ Interestingly enough, the `DecisionTreeClassifier` still produces the best F1 sc
 
 ![DEC vs BOOSTING Metrics](https://github.com/erankova/Phase_4_Project/assets/155934070/47364970-09b1-4fa0-a9e0-44f3ae0d63c4)
 
+## Best Model Evaluation
 
+Since our DecisionTree and AdaBoost are so close in F1 scores, we should compare the two further to make sure we are making wholistic decision when it comes to our predictive model.
 
+When we look at the feature importances of both models, the similarity between the two is further confirmed. They are both demonstrating the same top 10 features at very similar levels!
 
+<p align="center">
+  <img src="https://github.com/erankova/Phase_4_Project/assets/155934070/aeb0634d-980b-4c95-a6dd-7d63d761ef15" alt="Final Models Feature Importances">
+</p>
+
+Looking at our classification report we can tell that the `AdaBoostingClassifier` while, doing mostly as well as the `DecisionTreeClassifier` it has better scores for accuracy, recall, and precision. This means that it is balancing false negatives and false positives well and producing largly accurate predictions for us!
+
+<div style="display: flex; justify-content: center;">
+  <img src="https://github.com/erankova/Phase_4_Project/assets/155934070/69ea77ce-0ce0-4771-82d1-9a6c627b0064" alt="DecisionTree Classification Report" style="width: 50%;">
+  <img src="https://github.com/erankova/Phase_4_Project/assets/155934070/eefe984f-cab5-4b25-83d2-daff027f4342" alt="AdaBoost Classification Report" style="width: 50%;">
+</div>
+
+## Final Evaluation & Conclusion
+
+Based on a wholistic evaluation, we can conclude that the `AdaBoostingClassifier` provides us with the best results and overall most reliable predictions. This model not only has a comprable F1 score to our `DecisionTreeClassifier` but does better in the other relevant metrics, making it the overall best choice.
+
+**Recommendations:**
+
+For _<ins>Phase 1</ins>_ of this NLP task, we recommend implementing the model for the front desk staff, where the Healing Hearts team can coordinate around a process that pairs predicted class with the corresponding best professional equipped to answer these patient inquiries. This process can be implemented via phone, email, and SMS - routing the questions based on their predicted subject.
+
+**Positive Implications:** 
+
+Since the metrics are strong, we can be confident in routing questions to the right person, making the patient care more effient for both the office staff and patients alike.
+
+**Negative Implications:**
+
+The model is not perfect, and there will be the rare occasion that a question is paired with the wrong class. In such cases, the office staff should align on protocol so that patients are not provided misleading medical advice. Data on these instances should also be collected for future iterations.
+
+**Data Limitation and Future Considerations:**
+
+As seen in our exploration, our dataset is limited in record number as well as the amount of records available in each class. For future improvements, we would recommend to collect more data on both questions, answers, and associated categories to further improve model reliability.
+
+In addition, by increasing the amount of available data, our model can afford to add more strict constraints on minimum and maximum document frequency of tokens. This will make our predictions stronger and create a strong baseline to expand on how we use this information.
+
+Ultimately, Healing Hearts would like to implement a Retrieval-Augmented Generation (RAG) chatbot. This chatbot would enable patients and potentially medical staff to not only recieve the general category of the questions being asked, but an answer to those questions as well. This chatbot can be implemented where appropriate and provide an option to speak to a person if the patient so chooses, since Healing Hearts is first and foremost concerned about their patients satisfaction and wellbeing.
 
 
 
