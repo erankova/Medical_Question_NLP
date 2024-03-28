@@ -55,24 +55,65 @@ We can also use `LabelEncoder` to transform this variable before the train test 
 
 **Note:** There class `support groups` only has one record, if we plan to keep our class proportions when we plit our data, we will have to drop this class
 
-[Class Count Chart]
+![Class Count Chart](https://github.com/erankova/Phase_4_Project/assets/155934070/3d551dac-d9f1-43bf-bebc-8aea9d27ebc6)
 
 ### Preprocess Analysis
 
 First, we should take a look at what the word frequency looks like before cleaning our data for things like stopwords and punctuation. It looks like we have a lot of stop words as well as other words that typically would be meaningful but are not in our medical context.
 
-[Top 20 Raw Tolkens.png]
 ![Top 20 Raw Tolkens](https://github.com/erankova/Phase_4_Project/assets/155934070/611af996-01b0-4f38-9cf7-26414e6ec83b)
 
+Now let's see what our tolkens look like after removing stopwords by visualizing them in a wordcloud. It looks like some of the words from our raw tolken analysis made it into the word cloud giving us an idea of the features we might see after we vectorize.
 
+![Wordcloud](https://github.com/erankova/Phase_4_Project/assets/155934070/ada2e525-7403-4e08-936d-2c2baa4223f2)
 
+## Data Preparation
 
+To help us normalize our text, we implemented a `TextPreprocessor class`
+- Calls on `BaseEstimator` and `TransformerMixin` to be able to add class into pipeline
+- Makes text lowercase
+- Tokenizes the text and removes stop words
+- Tags with parts of speech
+- Lemmatizes the text with `WordNetLemmatizer`
 
+Before we split our data, we first drop the `support groups` class which contains only one record since this interferes with our stratifying the split to keep class distributions consistant.
 
+### Base Model Pipeline
 
+As our base model, we will try a `MultinomialNB` model as it is great for text classification problems. Before fitting, we have to add the `TFidVectorizer` to our pipeline to vectorize our text with class weights in mind.
 
+We set our minimum document frequency and maximum document frequency to .03 and .98 respectively to make sure that we don't penalize rare/frequent words too much but also don't loosen the thresholds too much and create noisy predictions.
 
+![Base Model Pipeline](https://github.com/erankova/Phase_4_Project/assets/155934070/864fac0a-1824-4379-a51b-7145abf7c2b5)
 
+_**We are left with 18 features after preprocessing our data in full**_
+
+<ins>**Baseline Results**</ins>
+Prior to hyperparameter tuning and cross validation we have:
+- **F1 Score** = .86
+- **Accuracy** = .90
+- **Precision** = .92
+- **Recall** = .90
+
+Since we have a class imbalance we will be focusing on a **weighted F1 score** as our primary metric.
+
+## Naive Bayes Models
+
+Now that we have our base model, we can finetune our `MultiNomialNB` to see if we can improve our scores.
+
+> For each subsequent model we try going forward we will utilize `RandomizedSearchCV` to tune our parameters and perform cross validation since it is less computationally costy and will save us some time while giving us direction about our model performance.
+
+We also try a `ComplementNB` model since it is supposed to be great for class imbalance. After hyperparameter tuning and cross validation however, we see our tuned `MultiNomialNB` performs significantly better on our F1 score.
+
+![MNB vs CNB Metrics](https://github.com/erankova/Phase_4_Project/assets/155934070/90a117f9-5f2f-43ef-a08f-b5c20311d572)
+
+## Tree Models
+
+Next we try some tree models, specifically the `DecisionTreeClassifier` and `RandomForestClassifier`.
+
+After applying `RandomizedSearchCV` to both, we can see that our `DecisionTreeClassifier` gives us the best F1 score on unseen data so far!
+
+![DEC vs NB Metrics](https://github.com/erankova/Phase_4_Project/assets/155934070/f17e4af3-2eaa-4b0b-ac35-034b06a2f1c8)
 
 
 
