@@ -55,17 +55,23 @@ We can also use `LabelEncoder` to transform this variable before the train test 
 
 **Note:** There class `support groups` only has one record, if we plan to keep our class proportions when we plit our data, we will have to drop this class
 
-<center>![Class Count Chart](https://github.com/erankova/Phase_4_Project/assets/155934070/3d551dac-d9f1-43bf-bebc-8aea9d27ebc6)</center>
+<p align="center">
+  <img src="https://github.com/erankova/Phase_4_Project/assets/155934070/3d551dac-d9f1-43bf-bebc-8aea9d27ebc6" alt="Class Count Chart">
+</p>
 
 ### Preprocess Analysis
 
 First, we should take a look at what the word frequency looks like before cleaning our data for things like stopwords and punctuation. It looks like we have a lot of stop words as well as other words that typically would be meaningful but are not in our medical context.
 
-![Top 20 Raw Tolkens](https://github.com/erankova/Phase_4_Project/assets/155934070/611af996-01b0-4f38-9cf7-26414e6ec83b)
+<p align="center">
+  <img src="https://github.com/erankova/Phase_4_Project/assets/155934070/611af996-01b0-4f38-9cf7-26414e6ec83b" alt="Top 20 Raw Tokens">
+</p>
 
 Now let's see what our tolkens look like after removing stopwords by visualizing them in a wordcloud. It looks like some of the words from our raw tolken analysis made it into the word cloud giving us an idea of the features we might see after we vectorize.
 
-![Wordcloud](https://github.com/erankova/Phase_4_Project/assets/155934070/ada2e525-7403-4e08-936d-2c2baa4223f2)
+<p align="center">
+  <img src="https://github.com/erankova/Phase_4_Project/assets/155934070/ada2e525-7403-4e08-936d-2c2baa4223f2" alt="Wordcloud">
+</p>
 
 ## Data Preparation
 
