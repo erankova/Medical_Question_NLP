@@ -185,4 +185,14 @@ In addition, by increasing the amount of available data, our model can afford to
 
 Ultimately, Healing Hands would like to implement a Retrieval-Augmented Generation (RAG) chatbot. This chatbot would enable patients and potentially medical staff to not only recieve the general category of the questions being asked, but an answer to those questions well, all based on similarity metrics created from existing data. Since Healing Hands is first and foremost concerned about their patients satisfaction and wellbeing, this chatbot can be implemented where appropriate and provide an option to speak to a person if the patient so chooses.
 
+## Repository Structure
+
+```
+├── Data
+├── Images
+├── .gitignore
+├── Medical_Question_NLP.pdf
+├── Medical_Question_NLP.ipynb
+└── README.md
+
 
