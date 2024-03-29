@@ -8,9 +8,9 @@
 
 ## Business Problem and Understanding
 
-**Stakeholders:** Healing Hearts Partners, Lead Receptionist, Lead Nurse, Lead Medical Assistant
+**Stakeholders:** Healing Hands Partners, Lead Receptionist, Lead Nurse, Lead Medical Assistant
 
-Healing Hearts medical practice is growing and is noticing that patients are not recieving response to common questions regarding specific diseases in a timely manner. They are interested in automating the Q&A process for both patients and the front desk staff who have a hard time distinguishing where to direct questions.
+Healing Hands medical practice is growing and is noticing that patients are not recieving response to common questions regarding specific diseases in a timely manner. They are interested in automating the Q&A process for both patients and the front desk staff who have a hard time distinguishing where to direct questions.
 
 For Phase 1 of this Natural Language Processing (NLP) task, we will be classifying the questions based on question type, aiming to predict the question type of questions being asked by patients.
 
@@ -101,6 +101,12 @@ Prior to hyperparameter tuning and cross validation we have:
 
 Since we have a class imbalance we will be focusing on a **weighted F1 score** as our primary metric.
 
+Let's also quickly look at our distribution of selected features. Comparing this chart to our wordcloud from earlier, we can see some similarities. Most distinguishing are terms such as 'syndrome' and 'symptoms' which are highly occuring in both. It's also worth noting that due to the medical nature of our NLP task, our selected features remained in their original form after lemmetization.
+
+<p align="center">
+  <img src="https://github.com/erankova/Medical_Question_NLP/assets/155934070/ef31d973-71e2-4db5-bf03-1193e1b2a252" alt="Feature Distribution">
+</p>
+
 ## Naive Bayes Models
 
 Now that we have our base model, we can finetune our `MultiNomialNB` to see if we can improve our scores.
@@ -141,10 +147,19 @@ When we look at the feature importances of both models, the similarity between t
 
 Looking at our classification report we can tell that the `AdaBoostingClassifier` while doing mostly as well as the `DecisionTreeClassifier`, it has better scores for accuracy, recall, and precision. This means that it is balancing false negatives and false positives well and producing largly accurate predictions for us!
 
+Lastly we should compare our tuned `AdaBoostingClassifier` above and the base `AdaBoostingClassifier` model we started.
+
 <p align="center">
   <img src="https://github.com/erankova/Phase_4_Project/assets/155934070/69ea77ce-0ce0-4771-82d1-9a6c627b0064" alt="DecisionTree Classification Report" style="width: 45%;">
   <img src="https://github.com/erankova/Phase_4_Project/assets/155934070/eefe984f-cab5-4b25-83d2-daff027f4342" alt="AdaBoost Classification Report" alt="AdaBoost Classification Report" style="width: 45%;">
 </p>
+
+Looks like we have a great improvement! Before tuning and cross validation, our base `AdaBoostingClassifier` did even worse than our original `MultiNomialNB`.
+
+<p align="center">
+  <img src="https://github.com/erankova/Medical_Question_NLP/assets/155934070/2d388cdc-74e7-4568-870b-aaedeed39c14" alt="Base ADA Classification Report">
+</p>
+
 
 ## Final Evaluation & Conclusion
 
@@ -152,7 +167,7 @@ Based on a wholistic evaluation, we can conclude that the `AdaBoostingClassifier
 
 **Recommendations:**
 
-For _<ins>Phase 1</ins>_ of this NLP task, we recommend implementing the model for the front desk staff, where the Healing Hearts team can coordinate around a process that pairs predicted class with the corresponding best professional equipped to answer these patient inquiries. This process can be implemented via phone, email, and SMS - routing the questions based on their predicted subject.
+For _<ins>Phase 1</ins>_ of this NLP task, we recommend implementing the model for the front desk staff, where the Healing Hands team can coordinate around a process that pairs predicted class with the corresponding best professional equipped to answer these patient inquiries. This process can be implemented via phone, email, and SMS - routing the questions based on their predicted subject.
 
 **Positive Implications:** 
 
@@ -168,6 +183,6 @@ As seen in our exploration, our dataset is limited in record number as well as t
 
 In addition, by increasing the amount of available data, our model can afford to add more strict constraints on minimum and maximum document frequency of tokens. This will make our predictions stronger and create a strong baseline to expand on how we use this information.
 
-Ultimately, Healing Hearts would like to implement a Retrieval-Augmented Generation (RAG) chatbot. This chatbot would enable patients and potentially medical staff to not only recieve the general category of the questions being asked, but an answer to those questions well, all based on similarity metrics created from existing data. Since Healing Hearts is first and foremost concerned about their patients satisfaction and wellbeing, this chatbot can be implemented where appropriate and provide an option to speak to a person if the patient so chooses.
+Ultimately, Healing Hands would like to implement a Retrieval-Augmented Generation (RAG) chatbot. This chatbot would enable patients and potentially medical staff to not only recieve the general category of the questions being asked, but an answer to those questions well, all based on similarity metrics created from existing data. Since Healing Hands is first and foremost concerned about their patients satisfaction and wellbeing, this chatbot can be implemented where appropriate and provide an option to speak to a person if the patient so chooses.
 
 
