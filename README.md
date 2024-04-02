@@ -1,6 +1,6 @@
 # Natural Language Processing Medical Question & Question Type
 
-**Data Sciencist:** Elina Rankova
+**Data Scientist:** Elina Rankova
 
  <p align="center"><img src="https://altheia.com/wp-content/uploads/2020/12/0KbmpXTpCCIt1TR1B-1280x720.png" width="720" height="450" style="margin: 0 auto;"/></p>
 
